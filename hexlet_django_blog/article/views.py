@@ -1,14 +1,17 @@
-# hexlet_django_blog/article/views.py
-
 from django.shortcuts import render
-# from django.http import HttpResponse
+from django.views import View
+
 
 # def index(request):
-#     return HttpResponse('article')
+#     app_name = "Hexlet django blog"  # Название приложения
+#     return render(request, "articles/index.html", {"app_name": app_name})
 
 
-def index(request):
-    app_name = "Hexlet django blog"  # Название приложения
-    return render(request, "articles/index.html", {"app_name": app_name})
-
-# Create your views here.
+class ArticleIndexView(View):
+    template_name = 'articles/index.html'
+    def get(self, request, *args, **kwargs):
+        app_name = "Hexlet django blog"
+        context = {
+            'app_name': app_name,
+        }
+        return render(request, self.template_name, context)
